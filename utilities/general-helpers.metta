@@ -1,3 +1,4 @@
+!(import! &self ../metta-utilities/lib-he)
 ;; a copy-cat of the if-decons-expr utility function in PeTTa
 ; (: if-decons-expr-custom (-> Expression Grounded Expression $a $b))
 ; (: if-decons-expr (-> Expression Variable Variable Atom Atom))
@@ -22,4 +23,18 @@
 ;     (chain (decons-atom $atom) $list
 ;       (if-unify $list ($head $tail) (return $then) (return $else)) )))))
 
-; !(if-decons-expr (1 2 3) $h $t $h else)      
+; !(if-decons-expr (1 2 3) $h $t $h else)  
+
+;; appears that some of the conditional utilities are defined as metta function and need to be imported 
+;; which appears to have been resolved with the import statement 🔝 
+;; but the issue of non-reducability persists
+(= (if-decons-expr $atom $head $tail $then $else)
+    (if-equal $atom ()
+                    $else
+                    (chain (decons-atom $atom) $list
+                        (if (= $list ($head $tail))
+                            $then
+                            $else))))
+
+!(if-decons-expr (1 2 3) $h $t $h else)                        
+!(if-equal (1 2) () empty notEmpty)
