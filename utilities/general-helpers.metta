@@ -1,4 +1,4 @@
-!(import! &self ../metta-utilities/lib-he)
+; !(import! &self ../metta-utilities/lib-he)
 ;; a copy-cat of the if-decons-expr utility function in PeTTa
 ; (: if-decons-expr-custom (-> Expression Grounded Expression $a $b))
 ; (: if-decons-expr (-> Expression Variable Variable Atom Atom))
@@ -42,3 +42,6 @@
 !(if-decons-expr (1 2 3) $h $t (+ 1 2) else)   
 
 !(if-equal (1 2) () empty notEmpty)
+
+
+
