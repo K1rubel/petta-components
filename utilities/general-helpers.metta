@@ -30,11 +30,15 @@
 ;; but the issue of non-reducability persists
 (= (if-decons-expr $atom $head $tail $then $else)
     (if-equal $atom ()
-                    $else
-                    (chain (decons-atom $atom) $list
-                        (if (= $list ($head $tail))
-                            $then
-                            $else))))
+                $else
+                (chain (decons-atom $atom) $list
+                    (if (= $list ($head $tail))
+                        $then
+                        $else))))
 
-!(if-decons-expr (1 2 3) $h $t $h else)                        
+; !(if-decons-expr (1 2 3) $h $t (+ 1 $h) else)   
+;; the call to grounded function has issue with variable arguments like the above 
+;; but works fine, although useless, for when the passed arguments are gounded themselves like                     
+!(if-decons-expr (1 2 3) $h $t (+ 1 2) else)   
+
 !(if-equal (1 2) () empty notEmpty)
